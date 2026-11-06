@@ -20,7 +20,7 @@ export default async function ApplicationsPage() {
     <div className="flex min-h-svh w-full flex-col items-center gap-6 p-6 md:p-10">
       <div className="flex w-full max-w-lg flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold">Мои заявки</h1>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button render={<Link href="/applications/new" />} nativeButton={false}>Оформить заявку</Button>
           <form action={logout}>
             <Button type="submit" variant="outline">Выйти</Button>

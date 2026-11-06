@@ -44,11 +44,9 @@ export function ApplicationForm() {
 
         <Field>
           <FieldLabel htmlFor="startDate">Дата начала обучения</FieldLabel>
-          <Input id="startDate" name="startDate" placeholder="ДД.ММ.ГГГГ" className="bg-background" />
-          {state.fieldErrors?.startDate ? (
+          <Input id="startDate" name="startDate" type="date" className="bg-background" />
+          {state.fieldErrors?.startDate && (
             <FieldDescription className="text-destructive">{state.fieldErrors.startDate}</FieldDescription>
-          ) : (
-            <FieldDescription>Формат: ДД.ММ.ГГГГ.</FieldDescription>
           )}
         </Field>
 

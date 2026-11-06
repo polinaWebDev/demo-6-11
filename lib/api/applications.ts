@@ -31,7 +31,7 @@ export async function createApplication(
   }
   const dateMatch = DATE_RE.exec(input.startDate)
   if (!dateMatch) {
-    fieldErrors.startDate = 'Дата должна быть в формате ДД.ММ.ГГГГ'
+    fieldErrors.startDate = 'Укажите дату начала обучения'
   }
   const payment = input.payment as Payment
   if (!VALID_PAYMENTS.includes(payment)) {
@@ -42,7 +42,7 @@ export async function createApplication(
     return { ok: false, fieldErrors }
   }
 
-  const [, day, month, year] = dateMatch
+  const [, year, month, day] = dateMatch
   const startDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)))
 
   await prisma.application.create({

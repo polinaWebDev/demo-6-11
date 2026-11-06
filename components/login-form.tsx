@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
+const isDev = process.env.NODE_ENV === "development"
+
 export function LoginForm({
   formError,
   pending,
@@ -35,6 +37,7 @@ export function LoginForm({
             name="login"
             type="text"
             placeholder="user123"
+            defaultValue={isDev ? "Admin" : undefined}
             required
             className="bg-background"
           />
@@ -46,6 +49,7 @@ export function LoginForm({
             id="password"
             name="password"
             type="password"
+            defaultValue={isDev ? "KorokNET" : undefined}
             required
             className="bg-background"
           />
