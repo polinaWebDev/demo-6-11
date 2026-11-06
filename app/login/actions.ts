@@ -21,5 +21,5 @@ export async function login(_prevState: LoginState, formData: FormData): Promise
 
     await createSession({userId: result.user.id, role: result.user.role})
 
-    redirect('/applications')
+    redirect(result.user.role === 'admin' ? '/admin' : '/applications')
 }

@@ -21,6 +21,11 @@ export default async function ApplicationsPage() {
       <div className="flex w-full max-w-lg flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-bold">Мои заявки</h1>
         <div className="flex flex-wrap items-center gap-2">
+          {session.role === 'admin' && (
+            <Button render={<Link href="/admin" />} nativeButton={false} variant="outline">
+              Панель администратора
+            </Button>
+          )}
           <Button render={<Link href="/applications/new" />} nativeButton={false}>Оформить заявку</Button>
           <form action={logout}>
             <Button type="submit" variant="outline">Выйти</Button>
