@@ -6,3 +6,49 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id           String        @id @default(uuid())
+  login        String        @unique
+  passwordHash String
+  fullName     String
+  phone        String
+  email        String
+  role         Role          @default(user)
+  createdAt    DateTime      @default(now())
+  application  Application[]
+}
+
+enum Role {
+  admin
+  user
+}
+
+model Application {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  course    Course
+  startDate DateTime
+  payment   Payment
+  status    Status   @default(new)
+  review    String?
+  createdAt DateTime @default(now())
+}
+
+enum Course {
+  algorithms
+  webdesign
+  databases
+}
+
+enum Payment {
+  cash
+  phone_transfer
+}
+
+enum Status {
+  new
+  in_progress
+  completed
+}

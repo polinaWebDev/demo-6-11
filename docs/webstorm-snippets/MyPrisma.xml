@@ -1,0 +1,138 @@
+<templateSet group="MyPrisma">
+  <template name="pgen" value="generator client {&#10;  provider = &quot;prisma-client&quot;&#10;  output   = &quot;$OUTPUT$&quot;&#10;}&#10;&#10;datasource db {&#10;  provider = &quot;$PROVIDER$&quot;&#10;}$END$" description="Prisma 7: generator prisma-client + datasource" toReformat="false" toShortenFQNames="true">
+    <variable name="OUTPUT" expression="" defaultValue="&quot;../src/generated/prisma&quot;" alwaysStopAt="true" />
+    <variable name="PROVIDER" expression="enum(&quot;postgresql&quot;, &quot;mysql&quot;, &quot;sqlite&quot;, &quot;sqlserver&quot;, &quot;mongodb&quot;, &quot;cockroachdb&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pmodel" value="model $NAME$ {&#10;  id        $TYPE$ @id @default($FN$)&#10;  $END$&#10;  createdAt DateTime @default(now()) @map(&quot;created_at&quot;)&#10;  updatedAt DateTime @updatedAt @map(&quot;updated_at&quot;)&#10;&#10;  @@map(&quot;$TABLE$&quot;)&#10;}" description="model with id, createdAt/updatedAt and @@map" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Name&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="enum(&quot;Int&quot;, &quot;String&quot;, &quot;BigInt&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FN" expression="enum(&quot;autoincrement()&quot;, &quot;uuid()&quot;, &quot;cuid()&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="TABLE" expression="" defaultValue="&quot;table_name&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pmin" value="model $NAME$ {&#10;  id $TYPE$ @id @default($FN$)&#10;  $END$&#10;}" description="Minimal model" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Name&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="" defaultValue="&quot;Int&quot;" alwaysStopAt="true" />
+    <variable name="FN" expression="" defaultValue="&quot;autoincrement()&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pid" value="id $TYPE$ @id @default($FN$)$END$" description="id field" toReformat="false" toShortenFQNames="true">
+    <variable name="TYPE" expression="enum(&quot;Int&quot;, &quot;String&quot;, &quot;BigInt&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FN" expression="enum(&quot;autoincrement()&quot;, &quot;uuid()&quot;, &quot;cuid()&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pts" value="createdAt DateTime @default(now()) @map(&quot;created_at&quot;)&#10;updatedAt DateTime @updatedAt @map(&quot;updated_at&quot;)$END$" description="createdAt + updatedAt" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pf" value="$NAME$ $TYPE$$MOD$ $END$" description="Scalar field (type picker, optional/list)" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="enum(&quot;String&quot;, &quot;Int&quot;, &quot;BigInt&quot;, &quot;Boolean&quot;, &quot;DateTime&quot;, &quot;Float&quot;, &quot;Decimal&quot;, &quot;Json&quot;, &quot;Bytes&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="MOD" expression="enum(&quot;&quot;, &quot;?&quot;, &quot;[]&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pstr" value="$NAME$ String$OPT$ @db.VarChar($LEN$)$END$" description="String with @db.VarChar" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
+    <variable name="OPT" expression="enum(&quot;&quot;, &quot;?&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="LEN" expression="" defaultValue="&quot;255&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pjson" value="$NAME$ Json$OPT$ @default(&quot;{}&quot;)$END$" description="Json field" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;data&quot;" alwaysStopAt="true" />
+    <variable name="OPT" expression="enum(&quot;&quot;, &quot;?&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="puniq" value="$NAME$ String @unique$END$" description="Unique field" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;email&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="prel" value="$FIELD$   $MODEL$$OPT$ @relation(fields: [$FIELD$Id], references: [$REF$], onDelete: $ONDELETE$)&#10;$FIELD$Id $FKTYPE$$OPT$$END$" description="Many-to-one relation (FK side)" toReformat="false" toShortenFQNames="true">
+    <variable name="FIELD" expression="" defaultValue="&quot;author&quot;" alwaysStopAt="true" />
+    <variable name="MODEL" expression="" defaultValue="&quot;User&quot;" alwaysStopAt="true" />
+    <variable name="OPT" expression="enum(&quot;&quot;, &quot;?&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="REF" expression="" defaultValue="&quot;id&quot;" alwaysStopAt="true" />
+    <variable name="ONDELETE" expression="enum(&quot;Cascade&quot;, &quot;SetNull&quot;, &quot;Restrict&quot;, &quot;NoAction&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="FKTYPE" expression="" defaultValue="&quot;Int&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="prelm" value="$NAME$ $MODEL$[]$END$" description="One-to-many (back side)" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;posts&quot;" alwaysStopAt="true" />
+    <variable name="MODEL" expression="" defaultValue="&quot;Post&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pone" value="$NAME$   $MODEL$?&#10;&#10;// in the dependent model:&#10;$DEP$   $DEPMODEL$ @relation(fields: [$DEP$Id], references: [id], onDelete: Cascade)&#10;$DEP$Id Int  @unique$END$" description="One-to-one relation" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;profile&quot;" alwaysStopAt="true" />
+    <variable name="MODEL" expression="" defaultValue="&quot;Profile&quot;" alwaysStopAt="true" />
+    <variable name="DEP" expression="" defaultValue="&quot;user&quot;" alwaysStopAt="true" />
+    <variable name="DEPMODEL" expression="" defaultValue="&quot;User&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pmn" value="model $A$On$B$ {&#10;  $AF$   $A$ @relation(fields: [$AF$Id], references: [id], onDelete: Cascade)&#10;  $AF$Id Int @map(&quot;$AF$_id&quot;)&#10;  $BF$   $B$ @relation(fields: [$BF$Id], references: [id], onDelete: Cascade)&#10;  $BF$Id Int @map(&quot;$BF$_id&quot;)&#10;&#10;  @@id([$AF$Id, $BF$Id])&#10;  @@index([$BF$Id])&#10;  @@map(&quot;$TABLE$&quot;)&#10;}$END$" description="Explicit many-to-many join table" toReformat="false" toShortenFQNames="true">
+    <variable name="A" expression="" defaultValue="&quot;A&quot;" alwaysStopAt="true" />
+    <variable name="B" expression="" defaultValue="&quot;B&quot;" alwaysStopAt="true" />
+    <variable name="AF" expression="" defaultValue="&quot;a&quot;" alwaysStopAt="true" />
+    <variable name="BF" expression="" defaultValue="&quot;b&quot;" alwaysStopAt="true" />
+    <variable name="TABLE" expression="" defaultValue="&quot;a_on_b&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="penum" value="enum $NAME$ {&#10;  $V1$&#10;  $V2$&#10;}$END$" description="enum" toReformat="false" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Role&quot;" alwaysStopAt="true" />
+    <variable name="V1" expression="" defaultValue="&quot;USER&quot;" alwaysStopAt="true" />
+    <variable name="V2" expression="" defaultValue="&quot;ADMIN&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pidx" value="@@index([$F$])$END$" description="@@index" toReformat="false" toShortenFQNames="true">
+    <variable name="F" expression="" defaultValue="&quot;field&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="puq" value="@@unique([$A$, $B$])$END$" description="Composite @@unique" toReformat="false" toShortenFQNames="true">
+    <variable name="A" expression="" defaultValue="&quot;a&quot;" alwaysStopAt="true" />
+    <variable name="B" expression="" defaultValue="&quot;b&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pcid" value="@@id([$A$, $B$])$END$" description="Composite @@id" toReformat="false" toShortenFQNames="true">
+    <variable name="A" expression="" defaultValue="&quot;a&quot;" alwaysStopAt="true" />
+    <variable name="B" expression="" defaultValue="&quot;b&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+  <template name="pmap" value="@@map(&quot;$T$&quot;)$END$" description="@@map" toReformat="false" toShortenFQNames="true">
+    <variable name="T" expression="" defaultValue="&quot;table_name&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="OTHER" value="true" />
+    </context>
+  </template>
+</templateSet>

@@ -1,0 +1,136 @@
+<templateSet group="MyReact">
+  <template name="rfc" value="export function $NAME$() {&#10;  return (&#10;    &lt;div&gt;$END$&lt;/div&gt;&#10;  )&#10;}" description="React function component" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="rfcp" value="interface $NAME$Props {&#10;  $PROPS$&#10;}&#10;&#10;export function $NAME$({ $DESTRUCTURED$ }: $NAME$Props) {&#10;  return (&#10;    &lt;div&gt;$END$&lt;/div&gt;&#10;  )&#10;}" description="React component with typed props" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <variable name="PROPS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DESTRUCTURED" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="rcc" value="'use client'&#10;&#10;export function $NAME$() {&#10;  return (&#10;    &lt;div&gt;$END$&lt;/div&gt;&#10;  )&#10;}" description="Client component (Next.js)" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="capitalize(camelCase(fileNameWithoutExtension()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="rpage" value="export default async function $NAME$() {&#10;  return (&#10;    &lt;main&gt;$END$&lt;/main&gt;&#10;  )&#10;}" description="Next.js server page" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Page&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="ctx" value="'use client'&#10;&#10;import { createContext, useContext, type ReactNode } from 'react'&#10;&#10;interface $NAME$ContextValue {&#10;  $FIELDS$&#10;}&#10;&#10;const $NAME$Context = createContext&lt;$NAME$ContextValue | null&gt;(null)&#10;&#10;export function $NAME$Provider({ children }: { children: ReactNode }) {&#10;  const value: $NAME$ContextValue = {$VALUE$}&#10;&#10;  return &lt;$NAME$Context.Provider value={value}&gt;{children}&lt;/$NAME$Context.Provider&gt;&#10;}&#10;&#10;export function use$NAME$() {&#10;  const ctx = useContext($NAME$Context)&#10;  if (!ctx) throw new Error('use$NAME$ must be used within $NAME$Provider')&#10;  return ctx&#10;}&#10;$END$" description="Context + Provider + hook" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Name&quot;" alwaysStopAt="true" />
+    <variable name="FIELDS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="us" value="const [$VALUE$, set$SETTER$] = useState&lt;$TYPE$&gt;($INIT$)" description="useState" toReformat="true" toShortenFQNames="true">
+    <variable name="VALUE" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="SETTER" expression="capitalize(VALUE)" defaultValue="" alwaysStopAt="false" />
+    <variable name="TYPE" expression="" defaultValue="&quot;string&quot;" alwaysStopAt="true" />
+    <variable name="INIT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="ue" value="useEffect(() =&gt; {&#10;  $BODY$&#10;}, [$DEPS$])$END$" description="useEffect" toReformat="true" toShortenFQNames="true">
+    <variable name="BODY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEPS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="uec" value="useEffect(() =&gt; {&#10;  $BODY$&#10;&#10;  return () =&gt; {&#10;    $CLEANUP$&#10;  }&#10;}, [$DEPS$])$END$" description="useEffect with cleanup" toReformat="true" toShortenFQNames="true">
+    <variable name="BODY" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="CLEANUP" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEPS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="ucb" value="const $NAME$ = useCallback(($PARAMS$) =&gt; {&#10;  $END$&#10;}, [$DEPS$])" description="useCallback" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
+    <variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEPS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="um" value="const $NAME$ = useMemo(() =&gt; $VALUE$, [$DEPS$])$END$" description="useMemo" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="DEPS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="ur" value="const $NAME$ = useRef&lt;$TYPE$&gt;($INIT$)$END$" description="useRef" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;ref&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="" defaultValue="&quot;HTMLDivElement&quot;" alwaysStopAt="true" />
+    <variable name="INIT" expression="" defaultValue="&quot;null&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="uctx" value="const $NAME$ = useContext($CTX$)$END$" description="useContext" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;value&quot;" alwaysStopAt="true" />
+    <variable name="CTX" expression="" defaultValue="&quot;Context&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="hook" value="export function use$NAME$($PARAMS$) {&#10;  $END$&#10;&#10;  return {}&#10;}" description="Custom hook" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="" defaultValue="&quot;Name&quot;" alwaysStopAt="true" />
+    <variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="cl" value="className=&quot;$END$&quot;" description="className attribute" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="true" />
+    </context>
+  </template>
+  <template name="onc" value="onClick={() =&gt; $END$}" description="onClick prop" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="true" />
+    </context>
+  </template>
+  <template name="mapj" value="{$ITEMS$.map(($ITEM$) =&gt; (&#10;  &lt;$TAG$ key={$ITEM$.$KEY$}&gt;$END$&lt;/$TAG$&gt;&#10;))}" description="Render list with map" toReformat="true" toShortenFQNames="true">
+    <variable name="ITEMS" expression="" defaultValue="&quot;items&quot;" alwaysStopAt="true" />
+    <variable name="ITEM" expression="" defaultValue="&quot;item&quot;" alwaysStopAt="true" />
+    <variable name="TAG" expression="" defaultValue="&quot;div&quot;" alwaysStopAt="true" />
+    <variable name="KEY" expression="" defaultValue="&quot;id&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="true" />
+    </context>
+  </template>
+  <template name="cond" value="{$COND$ &amp;&amp; ($END$)}" description="Conditional render" toReformat="true" toShortenFQNames="true">
+    <variable name="COND" expression="" defaultValue="&quot;condition&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="true" />
+    </context>
+  </template>
+  <template name="tern" value="{$COND$ ? (&#10;  $THEN$&#10;) : (&#10;  $ELSE$&#10;)}" description="Ternary render" toReformat="true" toShortenFQNames="true">
+    <variable name="COND" expression="" defaultValue="&quot;condition&quot;" alwaysStopAt="true" />
+    <variable name="THEN" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELSE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JSX_HTML" value="true" />
+    </context>
+  </template>
+</templateSet>
