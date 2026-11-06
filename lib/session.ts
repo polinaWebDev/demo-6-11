@@ -29,7 +29,6 @@ export async function createSession(payload: SessionPayload): Promise<void> {
     const token = await signSession(payload);
     (await cookies()).set('session', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
         maxAge: 3600
     });
 }
